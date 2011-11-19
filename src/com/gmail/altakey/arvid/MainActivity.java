@@ -8,6 +8,10 @@ import android.content.ActivityNotFoundException;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.LinkedList;
 
 public class MainActivity extends Activity
 {
@@ -35,9 +39,37 @@ public class MainActivity extends Activity
 		}
 	}
 
+	private List<String> searchFolders = new LinkedList<String>();
+
+	private void updateSearchFolderList()
+	{
+		StringBuilder builder = new StringBuilder();
+		for (String s : this.searchFolders)
+		{
+			builder.append(s);
+			builder.append("\n");
+		}
+		
+		TextView view = (TextView)findViewById(R.id.main_folder_list);
+		view.setText(builder.toString());
+	}
+
+	private void addToSearchFolder(String folder)
+	{
+		if (folder == null)
+			return;
+
+		this.searchFolders.add(folder);
+		this.updateSearchFolderList();
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		Log.d("MA.oAR", String.format("req: %d, res: %d, data: %s", requestCode, resultCode, data == null ? "(null)" : data.getData()));
+		if (data != null)
+		{
+			Log.d("MA.oAR", String.format("req: %d, res: %d, data: %s", requestCode, resultCode, data.getData()));
+			this.addToSearchFolder(data.getData().toString());
+		}
 	}
 }
