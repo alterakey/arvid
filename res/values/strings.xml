@@ -6,4 +6,5 @@
     <string name="err_no_file_manager">Oops, cannot invoke directory picker.  Perhaps your file manager doesn\'t support it.  Sorry.</string>
     <string name="search_label">SEARCH LABEL</string>
     <string name="search_hint">SEARCH HINT</string>
+    <string name="settings_description">SEARCH DESCRIPTION</string>
 </resources>
