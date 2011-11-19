@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MainActivity</string>
+    <string name="app_name">Text Search</string>
+    <string name="inst">Quick text search.</string>
+    <string name="activity_main">Quick text search configration</string>
 </resources>
