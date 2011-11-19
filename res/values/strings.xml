@@ -3,4 +3,5 @@
     <string name="app_name">Text Search</string>
     <string name="inst">Quick text search.</string>
     <string name="activity_main">Quick text search configration</string>
+    <string name="err_no_file_manager">Oops, cannot invoke directory picker.  Perhaps your file manager doesn\'t support it.  Sorry.</string>
 </resources>
