@@ -69,7 +69,10 @@ public class MainActivity extends Activity
 		if (data != null)
 		{
 			Log.d("MA.oAR", String.format("req: %d, res: %d, data: %s", requestCode, resultCode, data.getData()));
-			this.addToSearchFolder(data.getData().toString());
+
+			Uri content = data.getData();
+			if (content.getScheme().equals("file"))
+				this.addToSearchFolder(content.getPath());
 		}
 	}
 }
