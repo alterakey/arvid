@@ -11,9 +11,21 @@
     />
 <Button
     android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
+    android:layout_height="wrap_content"
     android:layout_gravity="center" 
-    android:text="Select folder..."
+    android:text="Add folder..."
     android:onClick="onSelectFolder"/>
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:text="Currently searching:" />
+<TextView
+    android:id="@+id/main_folder_list"
+    android:paddingLeft="24dip"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:text="(empty)"
+    />
 </LinearLayout>
 
