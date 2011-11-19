@@ -56,9 +56,6 @@ public class MainActivity extends Activity
 
 	private void addToSearchFolder(String folder)
 	{
-		if (folder == null)
-			return;
-
 		this.searchFolders.add(folder);
 		this.updateSearchFolderList();
 	}
