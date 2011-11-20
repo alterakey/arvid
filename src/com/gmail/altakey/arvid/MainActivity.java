@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 import android.widget.TextView;
-import android.app.SearchManager;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -22,17 +21,6 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-		Intent intent = getIntent();
-		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			// Handle the normal search query case
-			String query = intent.getStringExtra(SearchManager.QUERY);
-			Log.d("SA.oC", String.format("would do search with query: %s", query));
-		} else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-			// Handle a suggestions click (because the suggestions all use ACTION_VIEW)
-			Uri data = intent.getData();
-			Log.d("SA.oC", String.format("viewing: %s", data.toString()));
-		}
     }
 
 	public void onSelectFolder(View view)
