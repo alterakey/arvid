@@ -24,5 +24,5 @@
 	<provider android:name="SearchSuggestionProvider"
 		  android:authorities="com.gmail.altakey.arvid.SuggestionProvider" />
     </application>
-    
-</manifest> 
+
+</manifest>
