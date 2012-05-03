@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.app.SearchManager;
 
 public class SearchActivity extends Activity
 {

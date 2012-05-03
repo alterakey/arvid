@@ -22,7 +22,13 @@
 
 package com.gmail.altakey.arvid;
 
-import android.content.ContextProvider;
+import android.content.SearchRecentSuggestionsProvider;
+import android.content.UriMatcher;
+import android.provider.BaseColumns;
+import android.app.SearchManager;
+import android.net.Uri;
+import android.database.Cursor;
+import android.database.MatrixCursor;
 
 public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
 {
@@ -41,9 +47,6 @@ public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
 
     private static UriMatcher buildUriMatcher() {
         UriMatcher matcher =  new UriMatcher(UriMatcher.NO_MATCH);
-        // to get definitions...
-        matcher.addURI(AUTHORITY, "get", GET_WORD);
-        // to get suggestions...
         matcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY, SEARCH_SUGGEST);
         matcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH_SUGGEST);
         return matcher;
@@ -60,8 +63,6 @@ public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
                       "selectionArgs must be provided for the Uri: " + uri);
                 }
                 return getSuggestions(selectionArgs[0]);
-            case GET_WORD:
-                return getWord(uri);
             default:
                 throw new IllegalArgumentException("Unknown Uri: " + uri);
         }
@@ -72,22 +73,14 @@ public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
       String[] columns = new String[] {
           BaseColumns._ID,
 		  SearchManager.SUGGEST_COLUMN_TEXT_1,
-		  SearchManager.SUGGEST_COLUMN_TEXT_2,
-          SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID
+		  SearchManager.SUGGEST_COLUMN_TEXT_2
 	  };
 
-      return mDictionary.getWordMatches(query, columns);
+      MatrixCursor out = new MatrixCursor(columns);
+      out.addRow(new Object[] {0, "test 1", "spamish test"});
+      out.addRow(new Object[] {0, "test 2", "spamish test 2"});
+
+      return out;
     }
-
-    private Cursor getWord(Uri uri) {
-      String rowId = uri.getLastPathSegment();
-      String[] columns = new String[] {
-		  SearchManager.SUGGEST_COLUMN_TEXT_1,
-		  SearchManager.SUGGEST_COLUMN_TEXT_2
-	  }
-
-      return mDictionary.getWord(rowId, columns);
-    }
-
 
 }
