@@ -77,8 +77,8 @@ public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
 	  };
 
       MatrixCursor out = new MatrixCursor(columns);
-      out.addRow(new Object[] {0, "test 1", "spamish test"});
-      out.addRow(new Object[] {0, "test 2", "spamish test 2"});
+      out.addRow(new Object[] {1, "test 1", "spamish test"});
+      out.addRow(new Object[] {2, "test 2", "spamish test 2"});
 
       return out;
     }
