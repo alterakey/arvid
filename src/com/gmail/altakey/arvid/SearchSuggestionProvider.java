@@ -22,34 +22,35 @@
 
 package com.gmail.altakey.arvid;
 
-import android.content.SearchRecentSuggestionsProvider;
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.provider.BaseColumns;
 import android.app.SearchManager;
 import android.net.Uri;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.util.Log;
 
-public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
+public class SearchSuggestionProvider extends ContentProvider
 {
     final static String AUTHORITY = "com.gmail.altakey.arvid.SuggestionProvider";
-    final static int MODE = DATABASE_MODE_QUERIES;
 
     // UriMatcher stuff
     private static final int GET_WORD = 0;
     private static final int SEARCH_SUGGEST = 1;
     private static final UriMatcher sURIMatcher = buildUriMatcher();
 
-    public SearchSuggestionProvider() {
-        super();
-        setupSuggestions(AUTHORITY, MODE);
-    }
-
     private static UriMatcher buildUriMatcher() {
         UriMatcher matcher =  new UriMatcher(UriMatcher.NO_MATCH);
         matcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY, SEARCH_SUGGEST);
         matcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH_SUGGEST);
         return matcher;
+    }
+
+    @Override
+    public boolean onCreate() {
+        return true;
     }
 
     @Override
@@ -79,8 +80,50 @@ public class SearchSuggestionProvider extends SearchRecentSuggestionsProvider
       MatrixCursor out = new MatrixCursor(columns);
       out.addRow(new Object[] {1, "test 1", "spamish test"});
       out.addRow(new Object[] {2, "test 2", "spamish test 2"});
+      out.addRow(new Object[] {3, "test 3", "spamish test 3"});
+      out.addRow(new Object[] {4, "test 4", "spamish test 4"});
+      out.addRow(new Object[] {5, "test 5", "spamish test 5"});
+      out.addRow(new Object[] {6, "test 6", "spamish test 6"});
+      out.addRow(new Object[] {7, "test 7", "spamish test 7"});
+      out.addRow(new Object[] {8, "test 8", "spamish test 8"});
+      out.addRow(new Object[] {9, "test 9", "spamish test 9"});
+      out.addRow(new Object[] {10, "test 10", "spamish test 10"});
+      out.addRow(new Object[] {11, "test 11", "spamish test 11"});
+      out.addRow(new Object[] {12, "test 12", "spamish test 12"});
+      out.addRow(new Object[] {13, "test 13", "spamish test 13"});
+      out.addRow(new Object[] {14, "test 14", "spamish test 14"});
+      out.addRow(new Object[] {15, "test 15", "spamish test 15"});
+      out.addRow(new Object[] {16, "test 16", "spamish test 16"});
+      Log.d("SSP", String.format("rows: %d", out.getCount()));
+
+      out.moveToFirst();
 
       return out;
+    }
+
+   @Override
+   public String getType(Uri uri) {
+       switch (sURIMatcher.match(uri)) {
+       case SEARCH_SUGGEST:
+           return SearchManager.SUGGEST_MIME_TYPE;
+       default:
+           throw new IllegalArgumentException("Unknown URL " + uri);
+       }
+    }
+
+    @Override
+    public Uri insert(Uri uri, ContentValues values) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        throw new UnsupportedOperationException();
     }
 
 }
